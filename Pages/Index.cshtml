@@ -4,45 +4,189 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+<div x-data='setup()' class="flex flex-col items-center justify-center gap-2 text-center">
+    <h4 class="text-3xl">Welcome</h4>
+    <div class="">
+        <ul class="menu sm:menu-vertical menu-horizontal bg-base-200 rounded-box">
+            <template x-for="blade in blades">
+                <span :class="blade.classname" :data-tip="blade.tooltip">
+                    <button @@click="blade.show = !blade.show" class="btn lg:btn-md btn-sm">
+                        <span class="text-sm">
+                            <h2 x-text="blade.title"></h2>
+                        </span>
+                    </button>
+                </span>
+            </template>
+        </ul>
+    </div>
+
+    <div id="grid" class="grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 grid-rows-auto">
+
+        <section
+            x-transition
+            x-show="blades.sample.show"
+            x-collapse>
+            ...sample section
+        </section>
+
+        <section
+            x-transition
+            x-show="blades.alpine.show"
+            x-collapse>
+
+            <!-- alpinejs test -->
+
+            <div class="card w-96 bg-base-100 shadow-xl">
+
+                <div class="card-body">
 
 
-<!-- Vue test -->
+                    <h2 class="card-title">AlpineJS Test</h2>
 
-<div id="app"><p>my vue app</p></div>
+                    <div x-data="{ open: false }">
+                        <button class="text-xs w-24 btn btn-accent" x-on:click="open = !open">Expand</button>
 
-<!-- <script type="module">
-import helloWorld from 'hello-world';
-helloWorld('#app', 'Hello From ASP.NET Core');
-</script> -->
+                        <span x-show="open">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, aliquid atque consequatur, debitis dolore eius fugiat illum incidunt inventore iure labore laboriosam laudantium provident quis, recusandae reprehenderit soluta ullam ut.</p>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section
+            x-transition
+            x-show="blades.vue.show"
+            x-collapse>
 
 
-<!-- import json config from C# into client test -->
+            <div class="card w-96 bg-base-100 shadow-xl">
 
-<script type="module">
-import config from 'config' assert { type: 'json' };
-import helloWorld from 'hello-world';
-console.log(helloWorld);
-console.log(config.name); // IDEA: this will help with Alpine.js for sure!
-helloWorld('#app', `Hello ${config.name} From ASP.NET Core`);
-</script>
+                <div class="card-body">
 
-<!-- file selection test -->
+                    <h2 class="card-title">Vue test</h2>
 
-    <button>Select a text file</button>
+                    <p>A vue app should load here</p>
+                    <div id="app">
+                    </div>
 
-    <!-- Credit: https://web.dev/blog/import-maps-in-all-modern-browsers -->
-<script type="module">
-  import {fileOpen} from 'browser-fs-access';
+                    <!-- import json config from C# into client test -->
 
-  const button = document.querySelector('button');
-  button.addEventListener('click', async () => {
-    const file = await fileOpen({
-      mimeTypes: ['text/plain'],
-    });
-    console.log(await file.text());
-  });
-</script>
-    <!-- <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> -->
+                    <script type="module">
+                import config from 'config' assert { type: 'json' };
+                import helloWorld from 'hello-world';
+                // console.log(helloWorld);
+                console.log(config.name); // IDEA: this will help with Alpine.js for sure!
+                helloWorld('#app', `Hello ${config.name} From ASP.NET Core`);
+            </script>
+                </div>
+            </div>
+        </section>
+        <section
+            x-transition
+            x-show="blades.fs.show"
+            x-collapse>
+            <div class="card w-96 bg-base-100 shadow-xl">
+
+                <div class="card-body">
+                    <h2 class="card-title">file selection test</h2>
+                    <p>Click the button below to load a file and print it with `console.log`</p>
+
+                    <div class="card-actions justify-start">
+                        <button class='text-xs w-24 btn btn-accent' id="file_button">Select a text file</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Credit: https://web.dev/blog/import-maps-in-all-modern-browsers -->
+            <script type="module">
+                import {fileOpen} from 'browser-fs-access';
+
+                const button = document.querySelector('#file_button');
+                button.addEventListener('click', async () => {
+                    const file = await fileOpen({
+                        mimeTypes: ['text/plain'],
+                    });
+                    console.log(await file.text());
+                });
+            </script>
+        </section>
+        <section
+            x-transition
+            x-show="blades.card.show"
+            x-collapse>
+            <div class="card w-96 bg-base-100 shadow-xl">
+                <figure>
+                    <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes"/>
+                </figure>
+                <div class="card-body">
+                    <h2 class="card-title">Shoes!</h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div class="card-actions justify-end">
+                        <button class="btn btn-primary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
 </div>
+
+
+<script>
+
+function setup () {
+
+return {
+        blades: {
+            // sample: {
+            //     show: true, 
+            //     title: "sample",
+            //     tooltip: 'Sample section',
+            //     get classname() {
+            //         return !this.show? 'tooltip' : 'border-2 border-info'
+            //     }
+            // },   
+            card : {
+                show: true
+                , tooltip : "this is a card"
+                , title: "sample card",
+                get classname() {
+                    return !this.show? 'tooltip' : 'border-2 border-info'
+                }
+            },
+            vue: {
+                show: true, 
+                title: "Vue Test",
+                get classname() {
+                    return !this.show? 'tooltip' : 'border-2 border-info'
+                }
+            },  
+            alpine: {
+                show: true, 
+                title: "AlpineJS",
+                get classname() {
+                    return !this.show? 'tooltip' : 'border-2 border-info'
+                }
+            },    
+            
+            fs: {
+                show: true, 
+                title: "File System",
+                tooltip: "Access your local File System from Browser",
+                get classname() {
+                    return !this.show? 'tooltip' : 'border-2 border-info'
+                }
+            },  
+        }
+}
+}
+
+</script>
+
+<style>
+    section{
+    /*background: #258cfb;*/
+    /*min-height: 100vh;*/
+    /*min-width: 96px;*/
+    }
+</style>

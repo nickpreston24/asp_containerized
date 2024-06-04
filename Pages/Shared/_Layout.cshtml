@@ -1,18 +1,35 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="halloween" lang="en">
+
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+    <link
+        href="https://cdn.jsdelivr.net/npm/daisyui@2.50.0/dist/full.css"
+        rel="stylesheet"
+        type="text/css"/>
+    <link
+        href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css"
+        rel="stylesheet"
+        type="text/css"/>
+
+    <script src="https://unpkg.com/htmx.org@1.8.5"></script>
+
+    <!-- CDNS -->
+    <script src="//unpkg.com/alpinejs" defer></script>
+
+    <!-- IMPORT MAP -->
     <script type="importmap">
         {
         "imports": {
         "browser-fs-access": "https://unpkg.com/browser-fs-access@0.33.0/dist/index.modern.js",
         "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js",
         "hello-world": "@Url.Content("~/js/hello-world.js")",
-        "config": "@Url.Content("~/config")"
+        "config": "@Url.Content("~/config")",
+        "alpinejs": "//unpkg.com/alpinejs"
         }
     }
     </script>
@@ -20,39 +37,39 @@
     <title>@ViewData["Title"] - asp_containerized</title>
 </head>
 
-<body>
-    <header>
-        <nav>
-            <div>
-                <a>asp_containerized</a>
-
-                <div>
-                    <ul>
-                        <li>
-                            <a>Home</a>
-                        </li>
-                        <li>
-                            <a>Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <div>
-        <main role="main">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer>
+<body class="m-8">
+<header>
+    <nav>
         <div>
-            &copy; 2024 - asp_containerized - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
+            <a>asp_containerized</a>
 
-    @await RenderSectionAsync("Scripts", required: false)
+            <div>
+                <ul>
+                    <li>
+                        <a>Home</a>
+                    </li>
+                    <li>
+                        <a>Privacy</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div>
+    <main role="main" class="m-8">
+        @RenderBody()
+    </main>
+</div>
+
+<footer>
+    <div>
+        &copy; 2024 - asp_containerized - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    </div>
+</footer>
+
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>

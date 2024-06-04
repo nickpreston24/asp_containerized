@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CodeMechanic.Types" Version="1.0.9" />
+  </ItemGroup>
+
 </Project>
