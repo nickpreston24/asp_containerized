@@ -22,4 +22,7 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+app.MapGet("/config", 
+    () => new { name = "Nick" });
+
 app.Run();

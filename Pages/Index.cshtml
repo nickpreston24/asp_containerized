@@ -6,5 +6,43 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+
+<!-- Vue test -->
+
+<div id="app"><p>my vue app</p></div>
+
+<!-- <script type="module">
+import helloWorld from 'hello-world';
+helloWorld('#app', 'Hello From ASP.NET Core');
+</script> -->
+
+
+<!-- import json config from C# into client test -->
+
+<script type="module">
+import config from 'config' assert { type: 'json' };
+import helloWorld from 'hello-world';
+console.log(helloWorld);
+console.log(config.name); // IDEA: this will help with Alpine.js for sure!
+helloWorld('#app', `Hello ${config.name} From ASP.NET Core`);
+</script>
+
+<!-- file selection test -->
+
+    <button>Select a text file</button>
+
+    <!-- Credit: https://web.dev/blog/import-maps-in-all-modern-browsers -->
+<script type="module">
+  import {fileOpen} from 'browser-fs-access';
+
+  const button = document.querySelector('button');
+  button.addEventListener('click', async () => {
+    const file = await fileOpen({
+      mimeTypes: ['text/plain'],
+    });
+    console.log(await file.text());
+  });
+</script>
+    <!-- <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> -->
 </div>
