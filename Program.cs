@@ -35,7 +35,7 @@ app.MapGet("/html", () => Results.Extensions.Html(@$"<!doctype html>
 <html>
     <head><title>miniHTML</title></head>
     <body>
-        <h1 class='text-primary border-2 border-red'>Hello World</h1>
+        <h1 class='text-primary border-2 border-red-500'>Hello World</h1>
         <p>The time on the server is {DateTime.Now:O}</p>
     </body>
 </html>"));

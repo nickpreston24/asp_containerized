@@ -20,7 +20,7 @@ internal class HtmlResult : IResult
     }
 }
 
-internal static class HtmlResultExtensions
+public static class HtmlResultExtensions
 {
     /// <summary>
     /// Usage:
