@@ -4,7 +4,50 @@
     ViewData["Title"] = "Home page";
 }
 
-<div x-data='setup()' class="flex flex-col items-center justify-center gap-2 text-center">
+<div x-data="{
+
+        blades: {
+                card: {
+                    show: true,
+                    tooltip: 'this is a card',
+                    title: 'sample card',
+                    get classname() {
+                        return !this.show ? 'tooltip' : 'border-2 border-info'
+                    }
+                },
+                vue: {
+                    show: true,
+                    title: 'Vue Test',
+                    get classname() {
+                        return !this.show ? 'tooltip' : 'border-2 border-info'
+                    }
+                },
+                alpine: {
+                    show: true,
+                    title: 'AlpineJS',
+                    get classname() {
+                        return !this.show ? 'tooltip' : 'border-2 border-info'
+                    }
+                },
+                fs: {
+                    show: true,
+                    title: 'File System',
+                    tooltip: 'Access your local File System from Browser',
+                    get classname() {
+                        return !this.show ? 'tooltip' : 'border-2 border-info'
+                    }
+                },
+                sample: {
+                    show: false,
+                    title: 'sample',
+                    tooltip: 'Sample section',
+                    get classname() {
+                        return !this.show ? 'tooltip' : 'border-2 border-info'
+                    }
+                },
+            },
+}" 
+class="flex flex-col items-center justify-center gap-2 text-center">
     <h4 class="text-3xl">Welcome</h4>
     <div class="">
         <ul class="menu sm:menu-vertical menu-horizontal bg-base-200 rounded-box">
@@ -20,19 +63,13 @@
         </ul>
     </div>
 
-    <div id="grid" class="grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 grid-rows-auto">
+    <div id="grid" class="grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 grid-rows-auto gap-4">
 
-        <section
-            x-transition
-            x-show="blades.sample.show"
-            x-collapse>
+        <section x-transition x-show="blades.sample.show" x-collapse>
             ...sample section
         </section>
 
-        <section
-            x-transition
-            x-show="blades.alpine.show"
-            x-collapse>
+        <section x-transition x-show="blades.alpine.show" x-collapse>
 
             <!-- alpinejs test -->
 
@@ -40,25 +77,24 @@
 
                 <div class="card-body">
 
-
                     <h2 class="card-title">AlpineJS Test</h2>
 
                     <div x-data="{ open: false }">
                         <button class="text-xs w-24 btn btn-accent" x-on:click="open = !open">Expand</button>
 
                         <span x-show="open">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, aliquid atque consequatur, debitis dolore eius fugiat illum incidunt inventore iure labore laboriosam laudantium provident quis, recusandae reprehenderit soluta ullam ut.</p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, aliquid atque
+                                consequatur, debitis dolore eius fugiat illum incidunt inventore iure labore laboriosam
+                                laudantium provident quis, recusandae reprehenderit soluta ullam ut.
+                            </p>
                         </span>
 
                     </div>
                 </div>
             </div>
         </section>
-        <section
-            x-transition
-            x-show="blades.vue.show"
-            x-collapse>
-
+        <section x-transition x-show="blades.vue.show" x-collapse>
 
             <div class="card w-96 bg-base-100 shadow-xl">
 
@@ -73,7 +109,7 @@
                     <!-- import json config from C# into client test -->
 
                     <script type="module">
-                import config from 'config' assert { type: 'json' };
+                        import config from 'config' assert { type: 'json' };
                 import helloWorld from 'hello-world';
                 // console.log(helloWorld);
                 console.log(config.name); // IDEA: this will help with Alpine.js for sure!
@@ -82,10 +118,7 @@
                 </div>
             </div>
         </section>
-        <section
-            x-transition
-            x-show="blades.fs.show"
-            x-collapse>
+        <section x-transition x-show="blades.fs.show" x-collapse>
             <div class="card w-96 bg-base-100 shadow-xl">
 
                 <div class="card-body">
@@ -110,10 +143,7 @@
                 });
             </script>
         </section>
-        <section
-            x-transition
-            x-show="blades.card.show"
-            x-collapse>
+        <section x-transition x-show="blades.card.show" x-collapse>
             <div class="card w-96 bg-base-100 shadow-xl">
                 <figure>
                     <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes"/>
@@ -131,62 +161,57 @@
     </div>
 </div>
 
-
-<script>
-
-function setup () {
-
-return {
-        blades: {
-            // sample: {
-            //     show: true, 
-            //     title: "sample",
-            //     tooltip: 'Sample section',
-            //     get classname() {
-            //         return !this.show? 'tooltip' : 'border-2 border-info'
-            //     }
-            // },   
-            card : {
-                show: true
-                , tooltip : "this is a card"
-                , title: "sample card",
-                get classname() {
-                    return !this.show? 'tooltip' : 'border-2 border-info'
-                }
+<script type="text/javascript">
+    function setup() {
+        return {
+            blades: {
+                card: {
+                    show: true,
+                    tooltip: "this is a card",
+                    title: "sample card",
+                    get classname() {
+                        return !this.show ? 'tooltip' : 'border-2 border-info'
+                    }
+                },
+                vue: {
+                    show: true,
+                    title: "Vue Test",
+                    get classname() {
+                        return !this.show ? 'tooltip' : 'border-2 border-info'
+                    }
+                },
+                alpine: {
+                    show: true,
+                    title: "AlpineJS",
+                    get classname() {
+                        return !this.show ? 'tooltip' : 'border-2 border-info'
+                    }
+                },
+                fs: {
+                    show: true,
+                    title: "File System",
+                    tooltip: "Access your local File System from Browser",
+                    get classname() {
+                        return !this.show ? 'tooltip' : 'border-2 border-info'
+                    }
+                },
+                sample: {
+                    show: false,
+                    title: "sample",
+                    tooltip: 'Sample section',
+                    get classname() {
+                        return !this.show ? 'tooltip' : 'border-2 border-info'
+                    }
+                },
             },
-            vue: {
-                show: true, 
-                title: "Vue Test",
-                get classname() {
-                    return !this.show? 'tooltip' : 'border-2 border-info'
-                }
-            },  
-            alpine: {
-                show: true, 
-                title: "AlpineJS",
-                get classname() {
-                    return !this.show? 'tooltip' : 'border-2 border-info'
-                }
-            },    
-            
-            fs: {
-                show: true, 
-                title: "File System",
-                tooltip: "Access your local File System from Browser",
-                get classname() {
-                    return !this.show? 'tooltip' : 'border-2 border-info'
-                }
-            },  
         }
-}
-}
-
+    }
 </script>
 
 <style>
-    section{
-    /*background: #258cfb;*/
-    /*min-height: 100vh;*/
-    /*min-width: 96px;*/
+    section {
+        /*background: #258cfb;*/
+        /*min-height: 100vh;*/
+        /*min-width: 96px;*/
     }
 </style>
