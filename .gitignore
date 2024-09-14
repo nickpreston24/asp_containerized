@@ -1,3 +1,6 @@
+*.log
+*.nupkg
+.forklift
 wwwroot/lib
 node_modules
 .idea
